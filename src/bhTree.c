@@ -1,6 +1,9 @@
 #include "main.h"
 
 BHTree* createBHTree(Cube* cube) {
+    #ifdef DRAW_BARNES_HUT_CUBE_ANIMATIONS
+        drawCube(cube);
+    #endif
     BHTree* tree = malloc(sizeof(BHTree));
 
     tree->cube = cube;

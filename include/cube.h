@@ -20,5 +20,6 @@ Cube* subCube5(Cube* cube);
 Cube* subCube6(Cube* cube);
 Cube* subCube7(Cube* cube);
 Cube* subCube8(Cube* cube);
+void drawCube(Cube* cube);
 
 #endif

@@ -7,13 +7,13 @@ BY USING THE MOUSEWHEEL */
 extern Star* stars[];
 
 // Needed for FPS
-int frame = 0, time = 0, timebase = 0, fps = 0;
+int frame = 0, relativeTime = 0, timebase = 0, fps = 0;
 int angleX = 0;
 int angleY = 0;
 
 // Needed for movement along camera axis
-static float x=0.0f,y=0.0f,z=5.0f;
-static float lx=0.0f,ly=0.0f,lz=-1.0f;
+static float x = 0.0f, y = 0.0f, z = 5.0f;
+static float lx = 0.0f, ly = 0.0f, lz = -1.0f;
 float ratio = 0;
 
 
@@ -21,11 +21,6 @@ void drawStars() {
     glBegin(GL_POINTS);
     for (int i = 0; i < STAR_COUNT; i++)
     {
-        // GLUquadric *quad;
-        // quad = gluNewQuadric();
-        // glTranslatef(stars[i]->x, stars[i]->y, stars[i]->z);
-        // gluSphere(quad,0.1,100,20);
-
         glVertex3f(stars[i]->x, stars[i]->y, stars[i]->z);
     }
     glEnd();
@@ -59,8 +54,8 @@ void renderScreen(void) {
 
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     glPushMatrix();
-    glRotatef(angleX,1.0,0.0,0.0);
-    glRotatef(angleY,0.0,1.0,0.0);
+    glRotatef(angleX, 1.0, 0.0, 0.0);
+    glRotatef(angleY, 0.0, 1.0, 0.0);
     // Draw after this
     printFPS();
 
@@ -88,12 +83,12 @@ void changeSize(int w, int h) {
 	glViewport(0, 0, w, h);
 
 	// Set the correct perspective.
-	gluPerspective(45,ratio,1,1000);
+	gluPerspective(45, ratio, 1, 1000);
 	glMatrixMode(GL_MODELVIEW);
 	glLoadIdentity();
-	gluLookAt(x,y,z, 
+	gluLookAt(x, y, z, 
 		      x + lx, y + ly, z + lz,
-			  0.0f,1.0f,0.0f);
+			  0.0f, 1.0f, 0.0f);
     return;
 }
 
@@ -132,13 +127,13 @@ void moveMeAlongCamera(int direction) {
 	glLoadIdentity();
 	gluLookAt(x, y, z, 
 		      x + lx,y + ly,z + lz,
-			  0.0f,1.0f,0.0f);
+			  0.0f, 1.0f, 0.0f);
 }
 
 void renderBitmapString(int x, int y, void *font, char *string) {  
     char *c;
     glWindowPos2i(x, y);
-    for (c=string; *c != '\0'; c++) {
+    for (c = string; *c != '\0'; c++) {
         glutBitmapCharacter(font, *c);
     }
     return;
@@ -146,10 +141,10 @@ void renderBitmapString(int x, int y, void *font, char *string) {
 
 void calculateFPS() {
     frame++;
-	time=glutGet(GLUT_ELAPSED_TIME);
-	if (time - timebase > 1000) {
-		fps = frame*1000.0/(time-timebase);
-		timebase = time;		
+	relativeTime = glutGet(GLUT_ELAPSED_TIME);
+	if (relativeTime - timebase > 1000) {
+		fps = frame*1000.0/(relativeTime - timebase);
+		timebase = relativeTime;		
 		frame = 0;
 	}
     return;
