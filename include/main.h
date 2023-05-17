@@ -26,7 +26,7 @@
 #define GAMA 0.0001
 
 #define STAR_COUNT 50000     
-#define GALAXY1_RADIUS 0.9
+#define GALAXY1_RADIUS 1.5
 
 // If you wish to draw the barnes hut tree building animations, uncommment this
 // #define DRAW_BARNES_HUT_CUBE_ANIMATIONS

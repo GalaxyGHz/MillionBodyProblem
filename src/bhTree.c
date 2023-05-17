@@ -1,9 +1,6 @@
 #include "main.h"
 
 BHTree* createBHTree(Cube* cube) {
-    #ifdef DRAW_BARNES_HUT_CUBE_ANIMATIONS
-        drawCube(cube);
-    #endif
     BHTree* tree = malloc(sizeof(BHTree));
 
     tree->cube = cube;
@@ -53,6 +50,9 @@ void putStar(BHTree* tree, Star* star) {
 
 void insertStar(BHTree* tree, Star* star) {
     if (tree->colectiveMassAndPosition == NULL) {
+        #ifdef DRAW_BARNES_HUT_CUBE_ANIMATIONS
+        drawCube(tree->cube);
+        #endif
         tree->colectiveMassAndPosition = crateStar(star->x, star->y, star->z, star->dx, star->dy, star->dz, star->mass);
     }else if (!(isExternalNode(tree))) {
         calculateMassAndCenterOfMass(tree->colectiveMassAndPosition, star);
