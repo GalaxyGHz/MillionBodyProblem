@@ -19,7 +19,6 @@ int main(int argc, char** argv) {
 void simulation() {
     Cube* cube = createCube(0, 0, 0, 1.5*8.0);
     BHTree* tree = createBHTree(cube);
-    //drawCube(cube);
 
     for (int i = 0; i < STAR_COUNT; i++)
     {
