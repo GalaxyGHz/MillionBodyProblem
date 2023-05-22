@@ -7,6 +7,7 @@ typedef struct Star {
     double dx, dy, dz;  //Speed
     double fx, fy, fz;  //Force
     double mass;  //Mass
+    double r, g, b;
 
 } Star;
 

@@ -21,6 +21,7 @@ void drawStars() {
     glBegin(GL_POINTS);
     for (int i = 0; i < STAR_COUNT; i++)
     {
+        glColor3f(stars[i]->r, stars[i]->g, stars[i]->b);
         glVertex3f(stars[i]->x, stars[i]->y, stars[i]->z);
     }
     glEnd();

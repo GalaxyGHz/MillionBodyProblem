@@ -14,7 +14,7 @@
 #include "drawer.h"
 
 // Change this to suit your pc
-#define NUMBER_OF_THREADS 16
+#define NUMBER_OF_THREADS 8
 
 #define PI 3.14159265359
 
@@ -25,7 +25,7 @@
 #define G 0.0001
 #define GAMA 0.0001
 
-#define STAR_COUNT 50000     
+#define STAR_COUNT 10000     
 #define GALAXY1_RADIUS 1.5
 
 // If you wish to draw the barnes hut tree building animations, uncommment this
