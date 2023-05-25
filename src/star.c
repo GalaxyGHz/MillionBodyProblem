@@ -57,9 +57,10 @@ void resetForces(Star* star) {
 
 // Add the forces acting on starA due to starB
 void addForces(Star* starA, Star* starB) {
+    double EPS=0.1;
     double dd = distanceBetween(starA, starB);
 
-    double force = (G*(starA->mass)*(starB->mass))/(dd*dd*dd);
+    double force = (G*(starA->mass)*(starB->mass))/(dd*dd*dd+EPS*EPS*EPS);
 
     starA->fx += force*((starB->x) - (starA->x));
     starA->fy += force*((starB->y) - (starA->y));

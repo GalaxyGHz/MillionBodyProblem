@@ -90,6 +90,8 @@ void changeSize(int w, int h) {
 	gluLookAt(x, y, z, 
 		      x + lx, y + ly, z + lz,
 			  0.0f, 1.0f, 0.0f);
+			  
+	//moveMeAlongCamera(-10);
     return;
 }
 
