@@ -33,7 +33,7 @@
 
 void initStars();
 void simulation(void);
-void calculateOrbitalVelocity(Star* bh, Star* star, int rotation,int angle);
+void calculateOrbitalVelocity(Star* bh, Star* star, int rotation,double angle);
 void threadUpdateAndMoveStar(void* args);
 double randSpiral(void);
 double randfrom(double min, double max);

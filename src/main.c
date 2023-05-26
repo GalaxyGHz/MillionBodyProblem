@@ -6,15 +6,25 @@ args argList[NUMBER_OF_THREADS];
 pthread_t threadList[NUMBER_OF_THREADS];
 
 int main(int argc, char** argv) {
+     // TEST MALA OKOL VELIKE
+    /*
+    double galaxyR1 = 1.0;
+    double galaxyR2 = 0.5;
+    int m1 = 100000;
+    int m2 = 50000;
+    //initStars();
+    generateGalaxy(-1.0,-1.0,0.0,0.0,0,4*STAR_COUNT/5,0.0,0.0,0.0,galaxyR1,m1,1);
+    generateGalaxy(0.0,0.0,0.0,PI/4,4*STAR_COUNT/5,STAR_COUNT,0.0,0.0,0.0,galaxyR2,m2,1);
+    calculateOrbitalVelocity(stars[0], stars[4*STAR_COUNT/5],1,0.0);
+    */
     //TEST DVE ENAKI
     
     double galaxyR1 = 1.0;
     double galaxyR2 = 1.0;
     int m1 = 100000;
-    int m2 = 100000;
     //initStars();
-    generateGalaxy(0.0,0.0,0.0,0.0,0,STAR_COUNT/2,0.0,0.0,0.0,galaxyR1,m1,1);
-    generateGalaxy(-1.0,-1.0,0.0,0.0,STAR_COUNT/2,STAR_COUNT,0.0,0.0,0.0,galaxyR2,m2,-1);
+    generateGalaxy(-1.0,-1.0,0.0,PI/4,0,STAR_COUNT/2,0.0,0.0,0.0,galaxyR1,m1,1);
+    generateGalaxy(1.0,1.0,0.0,0.0,STAR_COUNT/2,STAR_COUNT,0.0,0.0,0.0,galaxyR2,m1,-1);
     
     // Prepare the window
     initScreen(&argc, argv);
@@ -81,16 +91,17 @@ void initStars() {
 }
 */
 
-void calculateOrbitalVelocity(Star* bh, Star* star, int rotation,int angle) {
+void calculateOrbitalVelocity(Star* bh, Star* star, int rotation,double angle) {
     double distance = distanceBetween(bh, star);
     double v = sqrt((bh->mass)*GAMA/distance);
+    double r[3];
+    r[0] = bh->x-star->x;
+    r[1] = bh->y-star->y;
+    r[2] = bh->z-star->z;
 
-    double r[2];
-    r[0] = bh->x - star->x;
-    r[1] = bh->y - star->y;
-    
-    star->dx = (rotation*r[1] / distance) * v;
-    star->dy = (-rotation*r[0] / distance) * v;
+    star->dx = (rotation*(cos(angle)*r[1]+sin(angle)*r[2]) / distance) * v;
+    star->dy = (-rotation*(r[0]*cos(angle)) / distance) * v;
+    star->dz = (-rotation*(r[0]*sin(angle)) / distance) * v;
     return;
 }
 
@@ -111,19 +122,22 @@ void generateGalaxy(double x, double y, double z, double angle, int start, int e
         free(stars[i]);
         stars[i] = NULL;
     }
-    // Create the central
+    // Create the center
     stars[start] = crateStar(x, y, z, dx, dy, dz, m);
     stars[start]->g = 1.0;
     // Generate spiral galaxy stars
     for (int i = start+1; i < end; i++) {
         double fi = randSpiral();
 
-
-        double ix = x + randfrom(0, r)*sin(fi);
-        double iy = y + randfrom(0, r)*cos(fi);
-        double iz = z + randfrom(0, r / 10.0);
-
-        stars[i] = crateStar(ix, iy, iz, 0, 0, 0, randfrom(0.01, 0.1));
+	//calculating random coordinates
+        double ix = randfrom(0, r)*sin(fi);
+        double iy = randfrom(0, r)*cos(fi);
+        double iz = randfrom(0, r / 10.0);
+        //rotating coordinates
+        double tx = ix+x;
+        double ty = iy*cos(angle)-iz*sin(angle)+y;
+        double tz = iz*cos(angle)+iy*sin(angle)+z;
+        stars[i] = crateStar(tx, ty, tz, 0, 0, 0, randfrom(0.01, 0.1));
         stars[i]->g = 0.5;
         calculateOrbitalVelocity(stars[start], stars[i], rotation, angle);
     }
