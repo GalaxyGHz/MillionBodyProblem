@@ -54,7 +54,6 @@ void threadUpdateAndMoveStar(void* args) {
 
 void initStars() {
      // TEST MALA OKOL VELIKE
-    
     double galaxyR1 = 1.0;
     double galaxyR2 = 0.5;
     int m1 = 100000;
@@ -66,16 +65,16 @@ void initStars() {
     bh2->dy *= 0.6;
     bh2->dz *= 0.6;
 
-    generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, 4*STAR_COUNT/5, 0.0, 0.0, 0.0, galaxyR1, m1, 1);
-    generateGalaxy(1.0, 1.0, 0.0, PI/4, 4*STAR_COUNT/5 ,STAR_COUNT, bh2->dx, bh2->dy, bh2->dz, galaxyR2, m2, 1);
+    generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, 4*STAR_COUNT/5, 0.0, 0.0, 0.0, galaxyR1, m1, 1,'r');
+    generateGalaxy(1.0, 1.0, 0.0, PI/4, 4*STAR_COUNT/5 ,STAR_COUNT, bh2->dx, bh2->dy, bh2->dz, galaxyR2, m2, 1, 'g');
     
     
     //TEST DVE ENAKI
     // double galaxyR1 = 1.0;
     // double galaxyR2 = 1.0;
     // int m1 = 100000;
-    // generateGalaxy(-1.0, -1.0, 0.0, PI/4, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m1, 1);
-    // generateGalaxy(1.0, 1.0, 0.0, 0.0, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m1, -1);
+    // generateGalaxy(-1.0, -1.0, 0.0, PI/4, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m1, 1, 'b');
+    // generateGalaxy(1.0, 1.0, 0.0, 0.0, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m1, -1, 'r');
     return;
 }
 
@@ -104,10 +103,9 @@ double randfrom(double min, double max) {
     return min + (rand() / div);
 }
 
-void generateGalaxy(double x, double y, double z, double angle, int start, int end, double dx,double dy, double dz, double r, int m, int rotation) {
+void generateGalaxy(double x, double y, double z, double angle, int start, int end, double dx,double dy, double dz, double r, int m, int rotation, char color) {
     // Create the center
     stars[start] = crateStar(x, y, z, dx, dy, dz, m);
-    stars[start]->g = 1.0;
     // Generate spiral galaxy stars
     for (int i = start+1; i < end; i++) {
         double fi = randSpiral();
@@ -121,8 +119,23 @@ void generateGalaxy(double x, double y, double z, double angle, int start, int e
         double ty = iy*cos(angle)-iz*sin(angle)+y;
         double tz = iz*cos(angle)+iy*sin(angle)+z;
         stars[i] = crateStar(tx, ty, tz, 0.0, 0.0, 0.0, randfrom(0.01, 0.1));
-        stars[i]->g = 0.5;
         calculateOrbitalVelocity(stars[start], stars[i], rotation, angle);
+        double distance = distanceBetween(stars[start], stars[i]);
+        if(color=='r'){
+            stars[i]->r=1.0;
+            stars[i]->b=(distance/r);
+            stars[i]->g=(distance/r);
+        }
+        if(color=='g'){
+            stars[i]->r=(distance/r);
+            stars[i]->g=1.0;
+            stars[i]->b=(distance/r);
+        }
+        if(color=='b'){
+            stars[i]->r=(distance/r);
+            stars[i]->g=(distance/r);
+            stars[i]->b=1.0;
+        }
         stars[i]->dx += stars[start]->dx;
         stars[i]->dy += stars[start]->dy;
         stars[i]->dz += stars[start]->dz;

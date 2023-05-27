@@ -15,9 +15,9 @@ Star* crateStar(double x, double y, double z, double dx, double dy, double dz, d
     star->fx = 0;
     star->fy = 0;
     star->fz = 0;
-    star->r = 0;
-    star->g = 0;
-    star->b = 0;
+    star->r = 1.0;
+    star->g = 1.0;
+    star->b = 1.0;
 
     return star;
 }
@@ -30,10 +30,6 @@ void moveStar(Star* star, double dt) {
     star->x += dt*(star->dx);
     star->y += dt*(star->dy);
     star->z += dt*(star->dz);
-    
-    double speed = sqrt(star->dx * star->dx + star->dy * star->dy + star->dz * star->dz);
-    star->r = 0.15*speed;  // Example: Set red component based on speed
-    star->b = 1.0-0.15*speed;   // Example: Set blue component to a constant value
     
     return;
 }
