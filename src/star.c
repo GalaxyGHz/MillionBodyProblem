@@ -19,7 +19,6 @@ Star* crateStar(double x, double y, double z, double dx, double dy, double dz, d
     star->g = 0;
     star->b = 0;
 
-
     return star;
 }
 

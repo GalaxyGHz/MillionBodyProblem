@@ -82,50 +82,50 @@ Cube* subCube8(Cube* cube) {
     return createCube(newX, newY, newZ, newSize);
 }
 
-
-
 void drawCube(Cube* cube) {
-    double rSizeX = cube->x + getSize(cube)/2;
-    double rSizeY = cube->y + getSize(cube)/2;
-    double rSizeZ = cube->z + getSize(cube)/2;
+    double rpSizeX = cube->x + getSize(cube)/2.0;
+    double rpSizeY = cube->y + getSize(cube)/2.0;
+    double rpSizeZ = cube->z + getSize(cube)/2.0;
+    double rmSizeX = cube->x - getSize(cube)/2.0;
+    double rmSizeY = cube->y - getSize(cube)/2.0;
+    double rmSizeZ = cube->z - getSize(cube)/2.0;
     glColor3f(0.0, 1.0, 0.38);
     glBegin(GL_LINES);
-    glVertex3f(rSizeX, rSizeY, rSizeZ);
-    glVertex3f(-rSizeX, rSizeY, rSizeZ);
+    glVertex3f(rpSizeX, rpSizeY, rpSizeZ);
+    glVertex3f(rmSizeX, rpSizeY, rpSizeZ);
 
-    glVertex3f(rSizeX, rSizeY, rSizeZ);
-    glVertex3f(rSizeX, -rSizeY, rSizeZ);
+    glVertex3f(rpSizeX, rpSizeY, rpSizeZ);
+    glVertex3f(rpSizeX, rmSizeY, rpSizeZ);
 
-    glVertex3f(rSizeX, rSizeY, rSizeZ);
-    glVertex3f(rSizeX, rSizeY, -rSizeZ);
+    glVertex3f(rpSizeX, rpSizeY, rpSizeZ);
+    glVertex3f(rpSizeX, rpSizeY, rmSizeZ);
 
-    glVertex3f(-rSizeX, rSizeY, rSizeZ);
-    glVertex3f(-rSizeX, -rSizeY, rSizeZ);
+    glVertex3f(rmSizeX, rpSizeY, rpSizeZ);
+    glVertex3f(rmSizeX, rmSizeY, rpSizeZ);
 
-    glVertex3f(rSizeX, -rSizeY, rSizeZ);
-    glVertex3f(-rSizeX, -rSizeY, rSizeZ);
+    glVertex3f(rpSizeX, rmSizeY, rpSizeZ);
+    glVertex3f(rmSizeX, rmSizeY, rpSizeZ);
 
-    glVertex3f(rSizeX, -rSizeY, rSizeZ);
-    glVertex3f(rSizeX, -rSizeY, -rSizeZ);
+    glVertex3f(rpSizeX, rmSizeY, rpSizeZ);
+    glVertex3f(rpSizeX, rmSizeY, rmSizeZ);
 
-    glVertex3f(-rSizeX, rSizeY, rSizeZ);
-    glVertex3f(-rSizeX, rSizeY, -rSizeZ);
+    glVertex3f(rmSizeX, rpSizeY, rpSizeZ);
+    glVertex3f(rmSizeX, rpSizeY, rmSizeZ);
 
-    glVertex3f(rSizeX, rSizeY, -rSizeZ);
-    glVertex3f(rSizeX, -rSizeY, -rSizeZ);
+    glVertex3f(rpSizeX, rpSizeY, rmSizeZ);
+    glVertex3f(rpSizeX, rmSizeY, rmSizeZ);
 
-    glVertex3f(rSizeX, rSizeY, -rSizeZ);
-    glVertex3f(-rSizeX, rSizeY, -rSizeZ);
+    glVertex3f(rpSizeX, rpSizeY, rmSizeZ);
+    glVertex3f(rmSizeX, rpSizeY, rmSizeZ);
 
-    glVertex3f(-rSizeX, -rSizeY, rSizeZ);
-    glVertex3f(-rSizeX, -rSizeY, -rSizeZ);
+    glVertex3f(rmSizeX, rmSizeY, rpSizeZ);
+    glVertex3f(rmSizeX, rmSizeY, rmSizeZ);
 
-    glVertex3f(rSizeX, -rSizeY, -rSizeZ);
-    glVertex3f(-rSizeX, -rSizeY, -rSizeZ);
+    glVertex3f(rpSizeX, rmSizeY, rmSizeZ);
+    glVertex3f(rmSizeX, rmSizeY, rmSizeZ);
 
-    glVertex3f(-rSizeX, rSizeY, -rSizeZ);
-    glVertex3f(-rSizeX, -rSizeY, -rSizeZ);
-    glEnd( );
-    glColor3f(1.0, 1.0, 1.0);
+    glVertex3f(rmSizeX, rpSizeY, rmSizeZ);
+    glVertex3f(rmSizeX, rmSizeY, rmSizeZ);
+    glEnd();
     return;
 }

@@ -156,6 +156,7 @@ void calculateFPS() {
 void printFPS() {
     char fpsMsg[128];
     sprintf(fpsMsg, "FPS: %d", fps);
+    glColor3f(1.0, 1.0, 1.0);
     renderBitmapString(getWidth() - 60, getHeight(), GLUT_BITMAP_8_BY_13, fpsMsg);
     return;
 }
