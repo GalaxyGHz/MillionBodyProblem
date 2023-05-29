@@ -23,7 +23,11 @@
 
 #define G 0.0001
 
-#define STAR_COUNT 10000
+#ifdef TEST1
+    #define STAR_COUNT 100000
+#else
+    #define STAR_COUNT 20000
+#endif
 
 // If you wish to draw the barnes hut tree building animations, uncommment this
 // #define DRAW_BARNES_HUT_CUBE_ANIMATIONS

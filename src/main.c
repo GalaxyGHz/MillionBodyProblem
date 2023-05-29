@@ -53,39 +53,39 @@ void threadUpdateAndMoveStar(void* args) {
 }
 
 void initStars() {
-     //TEST 1 VELIKA
-     /*
-     double r = 2.0;
-     int m = 1000000;
-     generateGalaxy(0.0, 0.0, 0.0, 0.0, 0, STAR_COUNT, 0.0, 0.0, 0.0, r, m, 1, 'b');
-     */
-     //TEST DVE POD KOTOM
-     /*
-     double galaxyR1 = 1.0;
-     double galaxyR2 = 1.0;
-     int m = 100000;
-     generateGalaxy(-1.5, 0.0, 0.0, PI/4, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m, 1, 'g');
-     generateGalaxy(1.5, 0.0, 0.0, -PI/4, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m, -1, 'r');
-    */
-     //TEST DVE ENAKI KI SE VERTITA V RAZLIČNE SMERI  
-     /*
-     double galaxyR1 = 1.0;
-     double galaxyR2 = 1.0;
-     int m1 = 100000;
-     generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m1, 1, 'b');
-     generateGalaxy(1.0, 1.0, 0.0, 0.0, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m1, -1, 'r');
-     */
-     // TEST MALA PADE V VELIKO
-     /*
+    #ifdef TEST1
+    //TEST 1 VELIKA
+    double r = 2.0;
+    int m = 1000000;
+    generateGalaxy(0.0, 0.0, 0.0, 0.0, 0, STAR_COUNT, 0.0, 0.0, 0.0, r, m, 1, 'b');
+
+    #elif TEST2
+    //TEST DVE POD KOTOM
+    double galaxyR1 = 1.0;
+    double galaxyR2 = 1.0;
+    int m = 100000;
+    generateGalaxy(-1.5, 0.0, 0.0, PI/4, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m, 1, 'g');
+    generateGalaxy(1.5, 0.0, 0.0, -PI/4, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m, -1, 'r');
+
+    #elif TEST3
+    //TEST DVE ENAKI KI SE VERTITA V RAZLIČNE SMERI
+    double galaxyR1 = 1.0;
+    double galaxyR2 = 1.0;
+    int m1 = 100000;
+    generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m1, 1, 'b');
+    generateGalaxy(1.0, 1.0, 0.0, 0.0, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m1, -1, 'r');
+
+    #elif TEST4
+    // TEST MALA PADE V VELIKO
     double galaxyR1 = 1.5;
     double galaxyR2 = 0.5;
     int m1 = 100000;
     int m2 = 3000;
     generateGalaxy(0.0, 0.0, 0.0, -PI/4, 0, 4*STAR_COUNT/5, 0.0, 0.0, 0.0, galaxyR1, m1, 1,'b');
     generateGalaxy(1.5, 1.5, 0.0, 0.0, 4*STAR_COUNT/5 ,STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m2, 1, 'r');
-    */
-     // TEST MALA OKOLI VELIKE
-     
+
+    #else
+    // TEST MALA OKOLI VELIKE
     double galaxyR1 = 1.0;
     double galaxyR2 = 0.5;
     int m1 = 100000;
@@ -98,7 +98,7 @@ void initStars() {
     bh2->dz *= 0.6;
     generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, 4*STAR_COUNT/5, 0.0, 0.0, 0.0, galaxyR1, m1, 1,'r');
     generateGalaxy(1.0, 1.0, 0.0, PI/4, 4*STAR_COUNT/5 ,STAR_COUNT, bh2->dx, bh2->dy, bh2->dz, galaxyR2, m2, 1, 'g');
-    
+    #endif
     
     return;
 }
