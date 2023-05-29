@@ -53,7 +53,39 @@ void threadUpdateAndMoveStar(void* args) {
 }
 
 void initStars() {
-     // TEST MALA OKOL VELIKE
+     //TEST 1 VELIKA
+     /*
+     double r = 2.0;
+     int m = 1000000;
+     generateGalaxy(0.0, 0.0, 0.0, 0.0, 0, STAR_COUNT, 0.0, 0.0, 0.0, r, m, 1, 'b');
+     */
+     //TEST DVE POD KOTOM
+     /*
+     double galaxyR1 = 1.0;
+     double galaxyR2 = 1.0;
+     int m = 100000;
+     generateGalaxy(-1.5, 0.0, 0.0, PI/4, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m, 1, 'g');
+     generateGalaxy(1.5, 0.0, 0.0, -PI/4, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m, -1, 'r');
+    */
+     //TEST DVE ENAKI KI SE VERTITA V RAZLIČNE SMERI  
+     /*
+     double galaxyR1 = 1.0;
+     double galaxyR2 = 1.0;
+     int m1 = 100000;
+     generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m1, 1, 'b');
+     generateGalaxy(1.0, 1.0, 0.0, 0.0, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m1, -1, 'r');
+     */
+     // TEST MALA PADE V VELIKO
+     /*
+    double galaxyR1 = 1.5;
+    double galaxyR2 = 0.5;
+    int m1 = 100000;
+    int m2 = 3000;
+    generateGalaxy(0.0, 0.0, 0.0, -PI/4, 0, 4*STAR_COUNT/5, 0.0, 0.0, 0.0, galaxyR1, m1, 1,'b');
+    generateGalaxy(1.5, 1.5, 0.0, 0.0, 4*STAR_COUNT/5 ,STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m2, 1, 'r');
+    */
+     // TEST MALA OKOLI VELIKE
+     
     double galaxyR1 = 1.0;
     double galaxyR2 = 0.5;
     int m1 = 100000;
@@ -64,17 +96,10 @@ void initStars() {
     bh2->dx *= 0.6;
     bh2->dy *= 0.6;
     bh2->dz *= 0.6;
-
     generateGalaxy(-1.0, -1.0, 0.0, 0.0, 0, 4*STAR_COUNT/5, 0.0, 0.0, 0.0, galaxyR1, m1, 1,'r');
     generateGalaxy(1.0, 1.0, 0.0, PI/4, 4*STAR_COUNT/5 ,STAR_COUNT, bh2->dx, bh2->dy, bh2->dz, galaxyR2, m2, 1, 'g');
     
     
-    //TEST DVE ENAKI
-    // double galaxyR1 = 1.0;
-    // double galaxyR2 = 1.0;
-    // int m1 = 100000;
-    // generateGalaxy(-1.0, -1.0, 0.0, PI/4, 0, STAR_COUNT/2, 0.0, 0.0, 0.0, galaxyR1, m1, 1, 'b');
-    // generateGalaxy(1.0, 1.0, 0.0, 0.0, STAR_COUNT/2, STAR_COUNT, 0.0, 0.0, 0.0, galaxyR2, m1, -1, 'r');
     return;
 }
 
@@ -123,17 +148,17 @@ void generateGalaxy(double x, double y, double z, double angle, int start, int e
         double distance = distanceBetween(stars[start], stars[i]);
         if(color=='r'){
             stars[i]->r=1.0;
-            stars[i]->b=(distance/r);
-            stars[i]->g=(distance/r);
+            stars[i]->b=(distance/r)-0.25;
+            stars[i]->g=(distance/r)-0.25;
         }
         if(color=='g'){
-            stars[i]->r=(distance/r);
+            stars[i]->r=(distance/r)-0.25;
             stars[i]->g=1.0;
-            stars[i]->b=(distance/r);
+            stars[i]->b=(distance/r)-0.25;
         }
         if(color=='b'){
-            stars[i]->r=(distance/r);
-            stars[i]->g=(distance/r);
+            stars[i]->r=(distance/r)-0.25;
+            stars[i]->g=(distance/r)-0.25;
             stars[i]->b=1.0;
         }
         stars[i]->dx += stars[start]->dx;
